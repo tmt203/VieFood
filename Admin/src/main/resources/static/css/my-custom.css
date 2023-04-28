@@ -1,0 +1,19 @@
+table th,
+table td {
+    text-align: center;
+}
+
+table th {
+    font-weight: bold;
+}
+table th:first-child {
+    vertical-align: middle;
+}
+
+table td:nth-child(-n+7) {
+    vertical-align: middle;
+}
+
+table td a {
+    margin: 4px;
+}

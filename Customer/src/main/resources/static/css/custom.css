@@ -1,0 +1,8 @@
+/** ADD YOUR AWESOME CODES HERE **/
+.btn[disabled] {
+    color: #aaa;
+    background-color: #eee;
+    border-color: #ddd;
+    pointer-events: none;
+    cursor: default;
+}

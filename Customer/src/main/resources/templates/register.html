@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+
+<head th:replace="fragments :: header">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments :: main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<div th:replace="fragments :: main-header"></div>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments :: top-search"></div>
+<!-- End Top Search -->
+
+<!-- Start Slider -->
+<div th:replace="fragments :: slider"></div>
+<!-- End Slider -->
+
+<section id="login-form">
+    <div class="noi-dung">
+        <div class="form">
+            <h2>Register</h2>
+            <div th:if="${message}" class="text-center alert" th:classappend="'alert-' + ${messageType}">
+                <p th:text="${message}"></p>
+            </div>
+            <form th:action="@{/register}" method="post" th:object="${customerDto}">
+                <div class="input-form">
+                    <!-- <span>User name</span> -->
+                    <input type="text" th:field="*{firstName}" placeholder="First Name" name="">
+                </div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}"
+                     th:errors="*{firstName}"
+                ></div>
+                <div class="input-form">
+                    <!-- <span>User name</span> -->
+                    <input type="text" th:field="*{lastName}" placeholder="Last Name" name="">
+                </div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}"
+                     th:errors="*{lastName}"
+                ></div>
+                <div class="input-form">
+                    <!-- <span>User name</span> -->
+                    <input type="email" th:field="*{username}" placeholder="Email" name="">
+                </div>
+                <div class="input-form">
+                    <input type="password" th:field="*{password}" placeholder="Password" name="">
+                </div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}"
+                ></div>
+                <div class="input-form">
+                    <input type="password" th:field="*{confirmPassword}" placeholder="Verify password" name="">
+                </div>
+                <div class="input-form">
+                    <p>Do You Already Have An Account ? <a th:href="@{/login}"> Sign in now </a></p>
+                </div>
+                <div class="input-form">
+                    <input type="submit" value="Sign up">
+                </div>
+            </form>
+            <h3>Log In With Social Network</h3>
+            <ul class="icon-dang-nhap">
+                <li><i class="fab fa-facebook-f"></i></i></li>
+                <li><i class="fab fa-google"></i></li>
+                <li><i class="fab fa-weibo"></i></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Start copyright  -->
+    <!--    <div class="footer-copyright">-->
+    <!--        <p class="footer-company">All Rights Reserved. &copy; 2023 <a href="#">Vie Foods</a> <br> Designed By: Tran Minh Tri, Vo Thi Phuong Thuy</a></p>-->
+    <!--    </div>-->
+    <!-- End copyright  -->
+</section>
+
+<!-- ALL JS FILES -->
+<div th:replace="fragments :: script"></div>
+</body>
+
+</html>

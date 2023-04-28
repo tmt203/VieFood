@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+
+<head th:replace="fragments :: header">
+
+</head>
+
+<body>
+    <!-- Start Main Top -->
+    <div th:replace="fragments :: main-top"></div>
+    <!-- End Main Top -->
+
+    <!-- Start Main Top -->
+    <div th:replace="fragments :: main-header"></div>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div th:replace="fragments :: top-search"></div>
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    <div th:replace="fragments :: slider"></div>
+    <!-- End Slider -->
+
+    <section id="login-form">
+        <div class="noi-dung">
+            <div class="form">
+                <h2>Log In</h2>
+                <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Invalid email or password
+                </div>
+                <div th:if="${param.logout}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    You have been logged out !
+                </div>
+                <form th:action="@{/do-login}" method="post">
+                    <div class="input-form">
+                        <!-- <span>User name</span> -->
+                        <input type="text" placeholder="Name" name="username">
+                    </div>
+                    <div class="input-form">
+                        <!-- <span>Password</span> -->
+                        <input type="password" placeholder="Password" name="password">
+                    </div>
+                    <div class="input-form">
+                        <input type="submit" value="Log In">
+                    </div>
+                    <div class="input-form">
+                        <p>Do You Already Have An Account ? <a th:href="@{/register}">Sign up now  </a></p>
+                    </div>
+                </form>
+                <h3>Log In With Social Network</h3>
+                <ul class="icon-dang-nhap">
+                    <li><i class="fab fa-facebook-f"></i></i></li>
+                    <li><i class="fab fa-google"></i></li>
+                    <li><i class="fab fa-weibo"></i></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Start copyright  -->
+        <div class="footer-copyright">
+            <p class="footer-company">All Rights Reserved. &copy; 2023 <a href="#">Vie Foods</a> <br> Designed By: Tran Minh Tri, Vo Thi Phuong Thuy</a></p>
+        </div>
+        <!-- End copyright  -->
+    </section>
+
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- ALL JS FILES -->
+    <div th:replace="fragments :: script"></div>
+</body>
+
+</html>

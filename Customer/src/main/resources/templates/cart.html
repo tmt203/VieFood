@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!-- Basic -->
+
+<head th:replace="fragments :: header">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments :: main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Header -->
+<div th:replace="fragments :: main-header"></div>
+<!-- End Header -->
+
+<!-- Start Top Search -->
+<div class="top-search">
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>
+<!-- End Top Search -->
+
+<!-- Start Slider -->
+<div th:replace="fragments :: slider"></div>
+<!-- End Slider -->
+<!-- End All Title Box -->
+
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <div th:if="${checkCart}" class="text-center alert alert-warning">
+                        <p th:text="${checkCart}"></p>
+                    </div>
+                    <table th:if="${checkCart == null}" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Images</th>
+                            <th>Product Name</th>
+                            <th>Cost</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${cart.items}">
+                            <td class="thumbnail-img">
+                                <img th:src="@{'data:image/jpeg;base64,' + ${item.product.image}}" class="img-fluid" alt="Image">
+
+                            </td>
+                            <td class="name-pr">
+                                <a th:href="@{'/find-product/' + ${item.product.id}}">
+                                    <p th:text="${item.product.name}"></p>
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p th:text="'$' + ${item.product.cost}"></p>
+                            </td>
+                            <form th:action="@{/update-cart}" method="post">
+                                <input type="hidden" name="id" th:value="${item.product.id}">
+                                <td class="quantity-box"><input type="number" size="4" name="quantity" th:value="${item.quantity}" min="0" step="1"
+                                                                class="c-input-text qty text"></td>
+                                <td class="total-pr">
+                                    <p th:text="'$' + ${item.totalPrice}"></p>
+                                </td>
+                                <td class="remove-pr">
+                                    <button type="submit" name="action" value="update" title="Update"
+                                            class="btn btn-primary">Update
+                                    </button>
+
+                                    <button type="submit" name="action" value="delete" title="Delete"
+                                            class="btn btn-warning">Delete
+                                    </button>
+                                </td>
+                            </form>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="order-box">
+                    <h3>Order summary</h3>
+                    <div class="d-flex">
+                        <h4>Sub Total</h4>
+                        <div class="ml-auto font-weight-bold" th:text = "${subTotal}"> </div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Discount</h4>
+                        <div class="ml-auto font-weight-bold"> $0</div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="d-flex">
+                        <h4>Tax</h4>
+                        <div class="ml-auto font-weight-bold"> $2</div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Shipping Cost</h4>
+                        <div class="ml-auto font-weight-bold"> Free</div>
+                    </div>
+                    <hr>
+                    <div class="d-flex gr-total">
+                        <h5>Grand Total</h5>
+                        <div class="ml-auto h5" th:text = " '$' + ${subTotal + 2 }"> </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-12 d-flex shopping-box">
+                <a th:href="@{/check-out}" class="ml-auto btn hvr-hover" th:classappend="${checkCart != null ? 'disabled' : ''}" >Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cart -->
+
+
+<!-- Start Footer  -->
+<footer th:replace="fragments :: footer"></footer>
+<!-- End Footer  -->
+
+<!-- ALL JS FILES -->
+<div th:replace="fragments :: script"></div>
+</body>
+
+</html>
